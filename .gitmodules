@@ -1,9 +1,9 @@
 [submodule "assignment-autotest"]
 	path = assignment-autotest
-	url = https://github.com/cu-ecen-5013/assignment-autotest
+	url = git@github.com:cu-ecen-aeld/assignment-autotest.git
 [submodule "buildroot"]
 	path = buildroot
 	url = https://git.busybox.net/buildroot/
 [submodule "assignment-3"]
 	path = assignment-3
-	url = https://github.com/cu-ecen-aeld/assignments-3-and-later-JarrettSiler
+	url = git@github.com:cu-ecen-aeld/assignments-3-and-later-JarrettSiler.git
