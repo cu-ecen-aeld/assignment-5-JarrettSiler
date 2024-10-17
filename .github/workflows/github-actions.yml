@@ -12,15 +12,27 @@ jobs:
         timeout-minutes: 120
         steps:
           - uses: actions/checkout@v2
-          - name: Checkout submodules
-            run: git submodule update --init --recursive
+
+          # Set up SSH agent and add private key
           - uses: webfactory/ssh-agent@v0.5.3
             with:
                 ssh-private-key: ${{ secrets.SSH_PRIVATE_KEY }}
+          
+          # Add GitHub to known hosts
+          - name: Add GitHub to known hosts
+            run: |
+              mkdir -p ~/.ssh
+              ssh-keyscan -t rsa github.com >> ~/.ssh/known_hosts
+
+          # Checkout submodules
+          - name: Checkout submodules
+            run: git submodule update --init --recursive
+
           - name: Run full test
             env:
               GIT_SSH_COMMAND: "ssh -o StrictHostKeyChecking=no"
             run: ./full-test.sh
+
           - name: Cleanup
             if: always()
             run: |
